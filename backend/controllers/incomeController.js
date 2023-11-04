@@ -32,7 +32,7 @@ const addIncome = asyncHAndler(async (req, res) => {
 // @desc Delete an Income
 // @route DELETE /api/income
 // @access Private
-const deletIncome = asyncHAndler(async (req, res) => {
+const deleteIncome = asyncHAndler(async (req, res) => {
     const income = await Income.findById(req.params.id);
 
     if (!income) {
@@ -68,5 +68,6 @@ const getIncome = asyncHAndler(async (req, res) => {
 
 module.exports = {
     addIncome,
-    getIncome
+    getIncome,
+    deleteIncome
 }
