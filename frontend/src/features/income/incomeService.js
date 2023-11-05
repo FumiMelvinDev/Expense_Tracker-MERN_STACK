@@ -28,9 +28,23 @@ const getAllIncome = async (token) => {
     return response.data
 }
 
+// Delete income
+const deleteIncome = async (id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.delete(API_URL + id, config)
+
+    return response.data
+}
+
 const incomeService = {
     addIncome,
-    getAllIncome
+    getAllIncome,
+    deleteIncome
 }
 
 export default incomeService

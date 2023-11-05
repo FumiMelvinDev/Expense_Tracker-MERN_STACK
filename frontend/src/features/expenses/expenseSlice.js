@@ -33,6 +33,17 @@ export const getAllExpenses = createAsyncThunk('expenses/getAll', async (_, thun
     }
 })
 
+// delete expense
+export const deleteExpense = createAsyncThunk('expenses/delete', async (id, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await expenseService.deleteExpense(id, token)
+    } catch (error) {
+        const message = (error.resonse && error.response.data && error.response.data.message) || error.message || error.toString()
+
+        return thunkAPI.rejectWithValue(message)
+    }
+})
 
 export const expenseSlice = createSlice({
     name: 'expense',
@@ -67,6 +78,21 @@ export const expenseSlice = createSlice({
                 state.expenses = action.payload
             })
             .addCase(getAllExpenses.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+
+            })
+            // delete
+            .addCase(deleteExpense.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deleteExpense.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.expenses = state.expenses.filter((expense) => expense._id !== action.payload.id)
+            })
+            .addCase(deleteExpense.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

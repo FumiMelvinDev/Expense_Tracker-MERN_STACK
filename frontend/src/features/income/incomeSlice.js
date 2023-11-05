@@ -33,6 +33,18 @@ export const getAllIncome = createAsyncThunk('incomes/getAll', async (_, thunkAP
     }
 })
 
+// get allincome
+export const deleteIncome = createAsyncThunk('incomes/deleteIncome', async (id, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await incomeService.deleteIncome(id, token)
+    } catch (error) {
+        const message = (error.resonse && error.response.data && error.response.data.message) || error.message || error.toString()
+
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 
 export const incomeSlice = createSlice({
     name: 'income',
@@ -71,6 +83,20 @@ export const incomeSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
 
+            })
+            // delete
+            .addCase(deleteIncome.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deleteIncome.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.incomes = state.incomes.filter((income) => income._id !== action.payload.id)
+            })
+            .addCase(deleteIncome.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
             })
     }
 })
