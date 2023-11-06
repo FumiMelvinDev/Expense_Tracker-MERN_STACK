@@ -8,11 +8,14 @@ import { currencyFormatter } from "../lib/utils";
 import { getAllExpenses, reset } from "../features/expenses/expenseSlice";
 import ExpenseItem from "../components/ExpenseItem";
 import { ColorRing } from "react-loader-spinner";
+import { getAllIncome } from "../features/income/incomeSlice";
 
 function Dashboard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [expenseModalIsOpen, setExpenseModalIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { incomes } = useSelector((state) => state.incomes);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -21,6 +24,18 @@ function Dashboard() {
   const { expenses, isLoading, isError, message } = useSelector(
     (state) => state.expenses
   );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    dispatch(getAllIncome());
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [isError, message, dispatch]);
 
   useEffect(() => {
     if (isError) {
@@ -54,6 +69,13 @@ function Dashboard() {
     );
   }
 
+  const totalIncome = incomes.reduce(
+    (total, income) => total + income.amount,
+    0
+  );
+
+  console.log("total" + totalIncome);
+
   return (
     <>
       <main className="text-slate-300">
@@ -61,7 +83,7 @@ function Dashboard() {
           <div className="sm:flex items-baseline gap-2">
             <div className="flex items-baseline gap-2">
               <small className="text-xs">My Balance</small>
-              <h3>{currencyFormatter(25000)}</h3>
+              <h3>{currencyFormatter(totalIncome)}</h3>
             </div>
             <div className="flex items-center gap-2 text-xs">
               <button

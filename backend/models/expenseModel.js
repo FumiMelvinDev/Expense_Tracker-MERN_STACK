@@ -22,7 +22,7 @@ const expenseSchema = mongoose.Schema({
     }
 },
     {
-        timeStamps: true
+        timestamps: true
     }
 )
 
