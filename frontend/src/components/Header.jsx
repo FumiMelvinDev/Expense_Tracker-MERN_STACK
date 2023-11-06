@@ -15,16 +15,14 @@ function Header() {
 
   return (
     <nav className="bg-teal-900 text-emerald-50">
-      <div className="flex items-center justify-between mx-auto py-2 max-w-3xl px-6">
+      <div className="flex items-center justify-between mx-auto py-2 max-w-3xl sm:px-6 px-3">
         <div className="font-mono text-2xl">
-          <Link to="/">
-            <span className="self-center text-2xl font-semibold whitespace-nowrap">
-              Expense Tracker
-            </span>
-          </Link>
+          <span className="self-center text-2xl font-semibold whitespace-nowrap hover:cursor-pointer">
+            Expense Tracker
+          </span>
         </div>
 
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center sm:space-x-4">
           {user ? (
             <>
               <div className="text-slate-200">Hi, {user && user.name}</div>

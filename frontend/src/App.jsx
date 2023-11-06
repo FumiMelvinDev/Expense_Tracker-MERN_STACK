@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Header />
         <main className="min-h-screen bg-slate-700 overflow-hidden text">
-          <div className="py-2 max-w-3xl px-6 mx-auto">
+          <div className="py-2 max-w-3xl sm:px-6 px-3 mx-auto">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<Login />} />

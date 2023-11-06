@@ -7,11 +7,7 @@ import ExpenseModal from "../components/ExpenseModal";
 import { currencyFormatter } from "../lib/utils";
 import { getAllExpenses, reset } from "../features/expenses/expenseSlice";
 import ExpenseItem from "../components/ExpenseItem";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { ColorRing } from "react-loader-spinner";
-import { Doughnut } from "react-chartjs-2";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Dashboard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -62,33 +58,35 @@ function Dashboard() {
     <>
       <main className="text-slate-300">
         <section>
-          <div className="">
-            <small className="text-xs">My Balance</small>
-            <h3>{currencyFormatter(35000)}</h3>
+          <div className="sm:flex items-baseline gap-2">
+            <div className="flex items-baseline gap-2">
+              <small className="text-xs">My Balance</small>
+              <h3>{currencyFormatter(25000)}</h3>
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              <button
+                className="btn-secondary border-[#7D4E57] bg-[#b472a4] px-2 py-1 rounded-lg ring-teal-800"
+                onClick={() => {
+                  setExpenseModalIsOpen(true);
+                }}
+              >
+                + expenses
+              </button>
+              <button
+                className="btn-secondary border-[#7D4E57] bg-[#A997DF] px-2 py-1 rounded-lg ring-teal-800"
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+              >
+                + income
+              </button>
+            </div>
           </div>
-        </section>
-
-        <section className="flex items-center gap-2 text-xs">
-          <button
-            className="btn-secondary border-[#7D4E57] bg-[#b472a4] px-3 py-2 rounded-lg ring-teal-800"
-            onClick={() => {
-              setExpenseModalIsOpen(true);
-            }}
-          >
-            + expenses
-          </button>
-          <button
-            className="btn-secondary border-[#7D4E57] bg-[#A997DF] px-3 py-2 rounded-lg ring-teal-800"
-            onClick={() => {
-              setModalIsOpen(true);
-            }}
-          >
-            + income
-          </button>
         </section>
         <section>
           <div className="my-4">
-            <h2 className="mb-2">Expenses History</h2>
+            <h2 className="">Expenses History</h2>
+            <small className="text-xs mb-2">Last 32 Days</small>
             {expenses.length > 0 ? (
               <div className="space-y-2">
                 {expenses.map((expense) => (
@@ -96,7 +94,9 @@ function Dashboard() {
                 ))}
               </div>
             ) : (
-              <h2>No expenses history</h2>
+              <>
+                <h2>No expenses history</h2>
+              </>
             )}
           </div>
         </section>

@@ -36,7 +36,7 @@ function Modal({ open, close, children }) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full py-2 px-6 mx-auto">
-                <div className="bg-white pb-4 pt-5 py-2 px-6">
+                <div className="bg-white pb-4 pt-5 py-2 px-6 text-slate-700">
                   <div className="flex items-center justify-end">
                     <button
                       type="button"

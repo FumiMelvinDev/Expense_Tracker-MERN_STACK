@@ -1,5 +1,5 @@
 export const currencyFormatter = (amount) => {
-  const formatter = Intl.NumberFormat("en-us", {
+  const formatter = Intl.NumberFormat("en-za", {
     currency: "ZAR",
     currencyDisplay: "narrowSymbol",
 

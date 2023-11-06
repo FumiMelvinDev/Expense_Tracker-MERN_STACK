@@ -36,7 +36,7 @@ const deleteExpense = async (id, token) => {
         }
     }
 
-    const response = await axios.get(API_URL + id, config)
+    const response = await axios.delete(API_URL + id, config)
 
     return response.data
 }

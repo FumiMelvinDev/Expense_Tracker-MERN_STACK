@@ -92,11 +92,11 @@ function ExpenseModal() {
 
   return (
     <div className="w-full">
-      <form className="space-y-2" onSubmit={onSubmit}>
+      <form className="space-y-2 text-slate-600" onSubmit={onSubmit}>
         <div>
           <label
             htmlFor="description"
-            className="block text-sm font-medium leading-6 text-slate-100"
+            className="block text-sm font-medium leading-6"
           >
             Expense Description
           </label>
@@ -108,7 +108,7 @@ function ExpenseModal() {
             onChange={onChange}
             autoComplete="description"
             required
-            className="block w-full rounded-md border-0 py-1 text-slate-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-100 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
+            className="block w-full rounded-md border-0 py-1 shadow-sm ring-1 ring-inset ring-gray-300 placeholder focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
           >
             <option value="">Select an Expense Description</option>
             <option value="Entertainment">Entertainment</option>
@@ -124,7 +124,7 @@ function ExpenseModal() {
         <div>
           <label
             htmlFor="amount"
-            className="block text-sm font-medium leading-6 text-slate-100"
+            className="block text-sm font-medium leading-6"
           >
             Expense amount
           </label>
@@ -137,7 +137,7 @@ function ExpenseModal() {
               onChange={onChange}
               autoComplete="amount"
               required
-              className="block w-full rounded-md border-0 py-1 text-slate-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-100 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
+              className="block w-full rounded-md border-0 py-1 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-100 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
             />
           </div>
         </div>

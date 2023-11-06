@@ -76,7 +76,7 @@ function IncomeModal() {
         <div>
           <label
             htmlFor="title"
-            className="block text-sm font-medium leading-6 text-slate-100"
+            className="block text-sm font-medium leading-6 text-slate-600"
           >
             Title
           </label>
@@ -89,7 +89,7 @@ function IncomeModal() {
               onChange={onChange}
               autoComplete="title"
               required
-              className="block w-full rounded-md border-0 py-1 text-slate-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-100 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
+              className="block w-full rounded-md border-0 py-1 text-slate-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-600 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
             />
           </div>
         </div>
@@ -97,7 +97,7 @@ function IncomeModal() {
         <div>
           <label
             htmlFor="amount"
-            className="block text-sm font-medium leading-6 text-slate-100"
+            className="block text-sm font-medium leading-6 text-slate-600"
           >
             Income amount
           </label>
@@ -110,7 +110,7 @@ function IncomeModal() {
               onChange={onChange}
               autoComplete="amount"
               required
-              className="block w-full rounded-md border-0 py-1 text-slate-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-100 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
+              className="block w-full rounded-md border-0 py-1 text-slate-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-100 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-xs sm:leading-6"
             />
           </div>
         </div>

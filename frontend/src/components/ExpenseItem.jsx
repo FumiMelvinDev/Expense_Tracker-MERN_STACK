@@ -1,18 +1,30 @@
 import React from "react";
 import { currencyFormatter } from "../lib/utils";
+import { AiFillDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { deleteExpense } from "../features/expenses/expenseSlice";
 
 function ExpenseItem({ expense }) {
+  const dispatch = useDispatch();
   return (
-    <section className="flex items-center justify-between border py-2 px-4 bg-slate-500 rounded-3xl text-sm hover:border-emerald-500 text-slate-700">
+    <section className="flex items-center justify-between border py-2 px-4 bg-slate-300 rounded-3xl text-sm hover:border-emerald-500 text-slate-700 hover:cursor-pointer">
       <div className="flex items-center capitalize justify-between gap-2">
         <div
           className="w-6 h-6 rounded-full"
           style={{ backgroundColor: expense.color }}
         />
         <h3>{expense.description}</h3>
-        <small>{expense.createdAt}</small>
+        <small>{new Date(expense.createdAt).toLocaleString("en-za")}</small>
       </div>
-      <p>{currencyFormatter(expense.amount)}</p>
+      <div className="flex gap-2">
+        <p>{currencyFormatter(expense.amount)}</p>
+        <button
+          className="text-red-500 text-lg hover:text-red-800"
+          onClick={() => dispatch(deleteExpense(expense._id))}
+        >
+          <AiFillDelete />
+        </button>
+      </div>
     </section>
   );
 }
