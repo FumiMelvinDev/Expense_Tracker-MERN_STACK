@@ -55,6 +55,26 @@ function Dashboard() {
     }
   }, [user, navigate]);
 
+  // Filter expenses for the last 32 days
+  const thirtyTwoDaysAgo = new Date();
+  thirtyTwoDaysAgo.setDate(thirtyTwoDaysAgo.getDate() - 32);
+
+  const expensesLast32Days = expenses.filter(
+    (expense) => new Date(expense.createdAt) >= thirtyTwoDaysAgo
+  );
+
+  // Calculate the total expenses for the last 32 days
+  const totalExpensesLast32Days = expensesLast32Days.reduce(
+    (total, expense) => total + expense.amount,
+    0
+  );
+
+  // Calculate total income
+  const totalIncome = incomes.reduce(
+    (total, income) => total + income.amount,
+    0
+  );
+
   if (isLoading) {
     return (
       <ColorRing
@@ -69,13 +89,6 @@ function Dashboard() {
     );
   }
 
-  const totalIncome = incomes.reduce(
-    (total, income) => total + income.amount,
-    0
-  );
-
-  console.log("total" + totalIncome);
-
   return (
     <>
       <main className="text-slate-300">
@@ -83,7 +96,9 @@ function Dashboard() {
           <div className="sm:flex items-baseline gap-2">
             <div className="flex items-baseline gap-2">
               <small className="text-xs">My Balance</small>
-              <h3>{currencyFormatter(totalIncome)}</h3>
+              <h3>
+                {currencyFormatter(totalIncome - totalExpensesLast32Days)}
+              </h3>
             </div>
             <div className="flex items-center gap-2 text-xs">
               <button
@@ -108,10 +123,13 @@ function Dashboard() {
         <section>
           <div className="my-4">
             <h2 className="">Expenses History</h2>
-            <small className="text-xs mb-2">Last 32 Days</small>
-            {expenses.length > 0 ? (
+            <div className="flex items-baseline gap-2">
+              <small className="text-xs mb-2">Last 32 Days</small>
+              <p>{currencyFormatter(totalExpensesLast32Days)}</p>
+            </div>
+            {expensesLast32Days.length > 0 ? (
               <div className="space-y-2">
-                {expenses.map((expense) => (
+                {expensesLast32Days.map((expense) => (
                   <ExpenseItem key={expense._id} expense={expense} />
                 ))}
               </div>
